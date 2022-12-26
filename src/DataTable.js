@@ -32,8 +32,8 @@ const DataTable = () => {
     ]
 
     const [studentList, setStudentList] = useState(studentValue);
-    const [student, setStudent] = useState({id: 0, firstName: '', lastName: '', age: 0, birthdate: '', country: '', city: ''})
-    const [showDetails, setShowDetails] = useState(false)
+    const [student, setStudent] = useState({id: 0, firstName: '', lastName: '', age: 0, birthdate: '', country: '', city: ''});
+    const [showDetails, setShowDetails] = useState(false);
 
     //TableHeader
     const TableHeader = () =>
