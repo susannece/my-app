@@ -1,10 +1,10 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import CrudDemo from "./CrudDemo";
 
-const Welcome = () => <h1>Welcome</h1>
-const About = () => <h1>About</h1>
-const Home = () => <h1>Home</h1>
+const Welcome = () => {return <h1>Welcome</h1>}
+const About = () => {return <h1>About</h1>}
+const Home = () => {return<h1>Home</h1>}
 const Person = () => <h1>Person</h1>
 const NotFound = () => <h1>Not Found</h1>
  
@@ -14,6 +14,7 @@ const DemoRouter = () => {
             <Router>
                 <Header/>
                 <Switch>
+                    <Route exact path="/" component={Welcome} />
                     <Route path="/welcome" component={Welcome} />
                     <Route path="/about" component={About} />
                     <Route path="/home" component={Home} />
