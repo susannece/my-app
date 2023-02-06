@@ -1,98 +1,79 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect } from 'react'
+import api from '../api/BaseApi'
 
 const CrudDemo = () => {
 
-    const persons = () => [ {
-            id: 1,
-            fullName: "David Persson",
-            email: "david@test.se"},
-        {   id: 2,
-            fullName: "Erik Persson",
-            email: "erik@test.se"},
-        {   id: 3,
-            fullName: "Filip Persson",
-            email: "filip@test.se"}, ]
+    const [persons, setPersons] = useState([])
 
-    const [personsList, setPersonsList] = useState(persons);
-    const [person, setPerson] = useState({id: 0, fullName: '', email: ''})
-    const initialPersonState = {id: 0, fullName: '', email: ''};
-    const [showDetails, setShowDetails] = useState(false);
+    useEffect(() => {
+       const fetchPersons = async () => {
+        try {
+            const respons = await api.get('/persons')
+            setPersons(respons.data)
+        } catch(err) {
+            if(err.respons){
+                console.log(err.respons.data)
+            } else {
+                console.log('Error: ' + err.respons.data)
+            }
+        }       
+        }
+        fetchPersons()
+      }, [])
 
-    const actionDetails = (props) => {
-        setPerson(props.persons);
-        setShowDetails(true);
-    }
+      const TableHeader = () => {
+        return(
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+        )
+      }
 
-    const actionDelete = (id) => {
-        setPersonsList(personsList.filter((person) => person.id !== id));
-    }
-
-    const actionEdit = () => {
-
-    }
-
-    const TableAction = (props) => {
+      const TableAction = () => {
         return(
             <div>
-                <button className="btn btn-primary" onClick = {actionDetails}>Details</button>
-                <button className="btn btn-danger" onClick = {()=>{actionDelete(props)}}>Delete</button>
-                <button className="btn btn-info" onClick = {actionEdit}>Edit</button>
+                <button className='btn btn-primary'>Details</button>
+                <button className='btn btn-danger'>Delete</button>
+                <button className='btn btn-warning'>Edit</button>
             </div>
         )
-    }
+      }
 
-    const ShowDetails = (props) => {
-        const person = useState(props.persons)
-        return(
-            showDetails?
-            <div>
-                <h2>Detailed information</h2>
-                <p>ID: {person.id}</p>
-                <p>Name: {person.fullName}</p>
-                <p>Email: {person.email}</p>
-                <button type="button" className="btn btn-outline-primary" onClick={() => {setPersonsList({}); setShowDetails(false)}}>Back</button>
-            </div>
-            :
-            <React.Fragment/>
-        )
-    }
-
-    const TableHeader = () => 
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-
-    const TableRow = (props) => {
-        const list = props.persons
-        const row = list.map((person) => {
-            return(
+      const TableRow = () => {
+       return (
+        persons.map((person) =>  (
                 <tr key={person.id}>
                     <td>{person.id}</td>
-                    <td>{person.fullName}</td>
-                    <td>{person.email}</td>
-                    <td><TableAction person={person} /></td>
+                    <td>{person.name}</td>
+                    <td><TableAction id={person.id} /></td>
                 </tr>
-            );
-        })
-        return <tbody>{row}</tbody>
-    }
+            ))
+      )}
 
-return(
-    <div>
-        <h2>Persons</h2>
-        <table>
-            <TableHeader/>
-            <TableRow persons = {personsList} />
-        </table>
-        <ShowDetails person={person}/>
-    </div>
-)
+      const Table = () => {
+        return (
+        <div >
+            <h1 className='bg-dark text-light'> List of people</h1>
+            <table className='table table-light table-striped' >
+                <TableHeader />
+                <tbody>
+                    <TableRow />
+                </tbody>
+            </table>
+        </div>
+        )
+      }
+
+      return(
+        <div className='container'>
+            <Table />
+        </div>
+      )
 
 }
 
-export default CrudDemo           
+export default CrudDemo

@@ -1,43 +1,43 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import CrudDemo from "./CrudDemo";
+import React from 'react'
+import { BrowserRouter, Link, Switch, Route } from 'react-router-dom'   
+import CrudDemo from './CrudDemo' 
 
-const Welcome = () => {return <h1>Welcome</h1>}
-const About = () => {return <h1>About</h1>}
-const Home = () => {return<h1>Home</h1>}
-const Person = () => <h1>Person</h1>
-const NotFound = () => <h1>Not Found</h1>
- 
 const DemoRouter = () => {
-    return(
-        <div className="container">
-            <Router>
+
+    const Welcome = () => <h1>Welcome</h1>
+    const Home = () => <h1>Home</h1>
+    const Person = () => <h1>Person</h1>
+    const About = () => <h1>About</h1>
+    const NotFound = () => <h1>Not Found</h1>
+
+    const Header = () => {
+        return(
+            <nav className='nav bg-primary nav-fill'>
+                <Link to='welcome' className='nav-link text-light'>Welcome</Link>
+                <Link to='home' className='nav-link text-light'>Home</Link>
+                <Link to='person' className='nav-link text-light'>Person</Link>
+                <Link to='about' className='nav-link text-light'>About</Link>
+                <Link to='crud' className='nav-link text-light'>CrudDemo</Link>
+            </nav>
+        )
+    }
+
+    return (
+        <div>
+            <BrowserRouter>
                 <Header/>
                 <Switch>
-                    <Route exact path="/" component={Welcome} />
-                    <Route path="/welcome" component={Welcome} />
-                    <Route path="/about" component={About} />
-                    <Route path="/home" component={Home} />
-                    <Route path="/person" component={Person} />
-                    <Route path="/notfound" component={NotFound} />
-                    <Route path="/cruddemo" component={CrudDemo} />
+                    <Route exact path='/' component={Welcome}/>
+                    <Route path='/welcome' component={Welcome}/>
+                    <Route path='/home' component={Home}/>
+                    <Route path='/person' component={Person}/>
+                    <Route path='/about' component={About}/>
+                    <Route path='/crud' component={CrudDemo}/>
+                    <Route component={NotFound}/>
                 </Switch>
-            </Router>
+            </BrowserRouter>
         </div>
     )
-}
-
-const Header = () => {
-    return(
-        <nav className="nav bg-primary nav-fill ">
-            <Link className="nav-link text-light" to="/welcome">Welcome</Link>
-            <Link className="nav-link text-light" to="/about">About</Link>
-            <Link className="nav-link text-light" to="/home">Home</Link>
-            <Link className="nav-link text-light" to="/person">Person</Link>
-            <Link className="nav-link text-light" to="/notfound">Not Found</Link>
-            <Link className="nav-link text-light" to="/cruddemo">Crud Demo</Link>
-        </nav>
-    );
 }
 
 export default DemoRouter

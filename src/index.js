@@ -4,12 +4,14 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 //Task 1 &2
 //import DataTable from './Task1/DataTable'; 
-//import DemoRouter from './Task2/DemoRouter';
+import DemoRouter from './Task2/DemoRouter';
+//import CrudDemo from './Task2/CrudDemo';
+
 
 //Övningar från Tania
 //import TaniaR from './TaniaR/TaniaR';
 //import CrudHooks from './TaniaR/CrudHooks';
-import RouterExample from './TaniaR/RouterExample';
+//import RouterExample from './TaniaR/RouterExample';
 
 //Övning från React
 //import Game from './TicTacToe/Game';
@@ -21,5 +23,5 @@ import RouterExample from './TaniaR/RouterExample';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <RouterExample />
+    <DemoRouter />
 );

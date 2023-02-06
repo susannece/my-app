@@ -1,0 +1,28 @@
+{
+  "persons": [
+    {
+      "id": 11,
+      "name": "David Persson",
+      "email": "david@test.se"
+    },
+    {
+      "id": 12,
+      "name": "Erik Svensson",
+      "email": "erik@test.se"
+    },
+    {
+      "id": 13,
+      "name": "Filip Andersson",
+      "email": "filip@test.se"
+    },
+    {
+      "id": 2,
+      "firstName": "Cesar",
+      "lastName": "Larsson",
+      "age": 56,
+      "birthdate": "19660606",
+      "country": "Sverige",
+      "city": "Hörby"
+    }
+  ]
+}
